@@ -275,6 +275,9 @@ int axp_init(void)
 	else
 		return ret;
 
+	// clear low voltage lockout, otherwise nothing will take effect
+	pmic_bus_write(0x02, 1 << 5);
+
 	return 0;
 }
 
