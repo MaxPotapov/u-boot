@@ -32,16 +32,18 @@ static int pwm_backlight_enable(struct udevice *dev)
 	uint duty_cycle;
 	int ret;
 
-	plat = dev_get_uclass_platdata(priv->reg);
-	debug("%s: Enable '%s', regulator '%s'/'%s'\n", __func__, dev->name,
-	      priv->reg->name, plat->name);
-	ret = regulator_set_enable(priv->reg, true);
-	if (ret) {
-		debug("%s: Cannot enable regulator for PWM '%s'\n", __func__,
-		      dev->name);
-		return ret;
+	if (priv->reg && IS_ENABLED(DM_REGULATOR)) {
+		plat = dev_get_uclass_platdata(priv->reg);
+		debug("%s: Enable '%s', regulator '%s'/'%s'\n", __func__,
+		      dev->name, priv->reg->name, plat->name);
+		ret = regulator_set_enable(priv->reg, true);
+		if (ret) {
+			debug("%s: Cannot enable regulator for PWM '%s'\n",
+			      __func__, dev->name);
+			return ret;
+		}
+		mdelay(120);
 	}
-	mdelay(120);
 
 	duty_cycle = priv->period_ns * (priv->default_level - priv->min_level) /
 		(priv->max_level - priv->min_level + 1);
