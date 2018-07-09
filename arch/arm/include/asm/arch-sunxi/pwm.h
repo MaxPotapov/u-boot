@@ -38,6 +38,11 @@
 #define SUNXI_PWM_MUX			SUN8I_GPH_PWM
 #endif
 
+#if defined CONFIG_MACH_SUN8I_A83T
+#define SUNXI_PWM_PIN0			SUNXI_GPD(28)
+#define SUNXI_PWM_MUX			SUN8I_GPD_PWM
+#endif
+
 struct sunxi_pwm {
 	u32 ctrl;
 	u32 ch0_period;
