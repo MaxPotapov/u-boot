@@ -588,6 +588,13 @@ config CMD_ARMFLASH
 	help
 	  ARM Ltd reference designs flash partition access
 
+config CMD_AXP
+	bool "axp - Read information from AXP813 PMIC"
+	depends on AXP818_POWER
+	help
+	  Shows A/D voltage, battery presence, battery capacity, charger
+	  presence based on register values inside AXP813.
+
 config CMD_CLK
 	bool "clk - Show clock frequencies"
 	help
