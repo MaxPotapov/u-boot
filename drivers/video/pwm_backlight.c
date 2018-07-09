@@ -29,7 +29,7 @@ static int pwm_backlight_enable(struct udevice *dev)
 	uint duty_cycle;
 	int ret;
 
-	if (priv->reg) {
+	if (priv->reg && IS_ENABLED(DM_REGULATOR)) {
 		plat = dev_get_uclass_platdata(priv->reg);
 		debug("%s: Enable '%s', regulator '%s'/'%s'\n", __func__,
 		      dev->name, priv->reg->name, plat->name);
