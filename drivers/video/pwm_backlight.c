@@ -77,10 +77,8 @@ static int pwm_backlight_ofdata_to_platdata(struct udevice *dev)
 	debug("%s: start\n", __func__);
 	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
 					   "power-supply", &priv->reg);
-	if (ret) {
+	if (ret)
 		debug("%s: Cannot get power supply: ret=%d\n", __func__, ret);
-		return ret;
-	}
 	ret = gpio_request_by_name(dev, "enable-gpios", 0, &priv->enable,
 				   GPIOD_IS_OUT);
 	if (ret) {
