@@ -45,8 +45,10 @@ static const u32 prescaler_table[] = {
 
 static int sunxi_pwm_config_pinmux(void)
 {
-#ifdef CONFIG_MACH_SUN50I
+#if defined(CONFIG_MACH_SUN50I)
 	sunxi_gpio_set_cfgpin(SUNXI_GPD(22), SUNXI_GPD_PWM);
+#elif defined(CONFIG_MACH_SUN8I_A83T)
+	sunxi_gpio_set_cfgpin(SUNXI_GPD(28), SUNXI_GPD_PWM);
 #endif
 	return 0;
 }
@@ -164,6 +166,8 @@ static const struct pwm_ops sunxi_pwm_ops = {
 static const struct udevice_id sunxi_pwm_ids[] = {
 	{ .compatible = "allwinner,sun5i-a13-pwm" },
 	{ .compatible = "allwinner,sun50i-a64-pwm" },
+	{ .compatible = "allwinner,sun8i-h3-pwm" },
+	{ .compatible = "allwinner,sun8i-a83t-pwm" },
 	{ }
 };
 
