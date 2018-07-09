@@ -458,6 +458,10 @@ extern int soft_i2c_gpio_scl;
 	"stdout=serial,vga\0" \
 	"stderr=serial,vga\0"
 #elif CONFIG_DM_VIDEO
+#define CONFIG_BMP_32BPP
+#define CONFIG_BMP_24BPP
+#define CONFIG_VIDEO_BMP_GZIP
+#define CONFIG_SYS_VIDEO_LOGO_MAX_SIZE (1024*600*3 * 2)
 #define CONFIG_SYS_WHITE_ON_BLACK
 #define CONSOLE_STDOUT_SETTINGS \
 	"stdout=serial,vidconsole\0" \
